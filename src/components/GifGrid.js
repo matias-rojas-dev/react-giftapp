@@ -1,28 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getGifs } from '../utils/getGifs';
+import GifGridItem from './GifGridItem';
 
 const GifGrid = ({category}) => {
 
-    const getGifs = async() => {
-        const url = 'https://api.giphy.com/v1/gifs/search?api_key=DcDNOvCPMWRDXs8lIEmWCI90aCHPITn4&q=Naruto=25&offset=0&rating=g&lang=en&limit=10'
-        const resp = await fetch(url);
-        const {data} = await resp.json();
-        const gifs = data.map(img => {
-            return {
-                id: img.id,
-                title: img.title,
-                url: img.images.downsized_medium.url,
-            }
-        })
+    const [images, setImages] = useState([]);
 
-        console.log(gifs)
-    }
+    useEffect( () => {
+        getGifs(category).then(
+            imgs => setImages(imgs)
+        )
+    }, [category] );
+    // el [] es para poder usar el componente cuando sea renderizao por primera vez
+    // hace semejanza con el componentDidMount
 
-    getGifs()
+    
 
     return (
-        <div>
-            <li>{category}</li>
+        <>
+        <h3>{category.toUpperCase()}</h3>
+        <div className='card-grid'>
+            {
+                images.map( img  => (
+                    <GifGridItem
+                        key={img.id}
+                        {...img}
+                    />
+                ))
+            }
         </div>
+        </>
     )
 }
 

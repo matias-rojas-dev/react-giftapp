@@ -12,3 +12,17 @@ input {
     width: 100%;
 
 }
+
+.card-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin: 10px 0;
+    overflow: hidden;
+}
