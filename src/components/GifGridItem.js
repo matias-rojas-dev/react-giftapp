@@ -1,10 +1,14 @@
 import React from 'react'
 
-const GifGridItem = ({id,title,url}) => {
+const GifGridItem = ({title,url}) => {
+    const blank = '_blank';
     return (
-        <div className='card'>
+        <div className='card animate__animated animate__fadeIn'>
             <p>{title}</p>
-            <img src={url} alt={title} />
+            <a href={url}  target={blank} >
+                <img src={url} alt={title} />
+            </a>
+            
         </div>
     )
 }
